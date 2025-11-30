@@ -1,0 +1,10 @@
+[package]
+name = "game_of_life"
+version = "0.1.0"
+edition = "2021"
+description = "Conway's Game of Life - Terminal Implementation"
+
+[dependencies]
+crossterm = "0.27"
+rand = "0.8"
+
