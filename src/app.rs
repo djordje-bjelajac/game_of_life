@@ -6,12 +6,13 @@ use eframe::egui::{
     ComboBox, Color32, RichText, Sense, Slider,
 };
 
-use crate::{cell::Cell, grid::Grid, rules::next_generation};
-
-const MIN_GRID_SIZE: usize = 10;
-const MAX_GRID_SIZE: usize = 200;
-const MIN_UPS: u32 = 1;
-const MAX_UPS: u32 = 60;
+use crate::{
+    cell::Cell,
+    constants::{MAX_GRID_SIZE, MAX_UPS, MIN_GRID_SIZE, MIN_UPS},
+    grid::Grid,
+    patterns::PATTERNS,
+    rules::next_generation,
+};
 
 pub struct GameApp {
     grid: Grid,
@@ -50,116 +51,6 @@ impl Settings {
         Duration::from_secs_f32(1.0 / self.updates_per_second as f32)
     }
 }
-
-struct PatternDefinition {
-    name: &'static str,
-    cells: &'static [(i32, i32)],
-}
-
-const PATTERNS: [PatternDefinition; 4] = [
-    PatternDefinition {
-        name: "Glider",
-        cells: &[(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)],
-    },
-    PatternDefinition {
-        name: "Blinker",
-        cells: &[(-1, 0), (0, 0), (1, 0)],
-    },
-    PatternDefinition {
-        name: "Pulsar",
-        cells: &[
-            (-6, -4),
-            (-5, -4),
-            (-4, -4),
-            (-2, -4),
-            (-1, -4),
-            (0, -4),
-            (-6, -9),
-            (-6, -8),
-            (-6, -7),
-            (-6, -2),
-            (-6, -1),
-            (-6, 0),
-            (6, -4),
-            (5, -4),
-            (4, -4),
-            (2, -4),
-            (1, -4),
-            (0, -4),
-            (6, -9),
-            (6, -8),
-            (6, -7),
-            (6, -2),
-            (6, -1),
-            (6, 0),
-            (-6, 4),
-            (-5, 4),
-            (-4, 4),
-            (-2, 4),
-            (-1, 4),
-            (0, 4),
-            (-6, 9),
-            (-6, 8),
-            (-6, 7),
-            (-6, 2),
-            (-6, 1),
-            (-6, 0),
-            (6, 4),
-            (5, 4),
-            (4, 4),
-            (2, 4),
-            (1, 4),
-            (0, 4),
-            (6, 9),
-            (6, 8),
-            (6, 7),
-            (6, 2),
-            (6, 1),
-            (6, 0),
-        ],
-    },
-    PatternDefinition {
-        name: "Gosper Glider Gun",
-        cells: &[
-            (5, 1),
-            (5, 2),
-            (6, 1),
-            (6, 2),
-            (5, 11),
-            (6, 11),
-            (7, 11),
-            (4, 12),
-            (8, 12),
-            (3, 13),
-            (9, 13),
-            (3, 14),
-            (9, 14),
-            (6, 15),
-            (4, 16),
-            (8, 16),
-            (5, 17),
-            (6, 17),
-            (7, 17),
-            (6, 18),
-            (3, 21),
-            (4, 21),
-            (5, 21),
-            (3, 22),
-            (4, 22),
-            (5, 22),
-            (2, 23),
-            (6, 23),
-            (1, 25),
-            (2, 25),
-            (6, 25),
-            (7, 25),
-            (3, 35),
-            (4, 35),
-            (3, 36),
-            (4, 36),
-        ],
-    },
-];
 
 impl GameApp {
     pub fn new(_cc: &eframe::CreationContext<'_>) -> Self {

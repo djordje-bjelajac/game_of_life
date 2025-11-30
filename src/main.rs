@@ -1,6 +1,8 @@
 mod app;
 mod cell;
+mod constants;
 mod grid;
+mod patterns;
 mod rules;
 
 use app::GameApp;
