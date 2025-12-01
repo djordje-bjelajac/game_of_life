@@ -6,12 +6,8 @@ use eframe::egui::{
     ComboBox, Color32, RichText, Sense, Slider,
 };
 
-use crate::{
-    cell::Cell,
-    constants::{MAX_GRID_SIZE, MAX_UPS, MIN_GRID_SIZE, MIN_UPS},
-    grid::Grid,
-    patterns::PATTERNS,
-    rules::next_generation,
+use crate::domain::{
+    next_generation, Cell, Grid, PATTERNS, MAX_GRID_SIZE, MAX_UPS, MIN_GRID_SIZE, MIN_UPS,
 };
 
 pub struct GameApp {

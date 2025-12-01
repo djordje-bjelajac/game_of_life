@@ -1,4 +1,4 @@
-use crate::grid::Grid;
+use super::grid::Grid;
 
 pub fn count_neighbors(grid: &Grid, x: usize, y: usize) -> u8 {
     let mut count = 0u8;

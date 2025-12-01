@@ -1,11 +1,7 @@
-mod app;
-mod cell;
-mod constants;
-mod grid;
-mod patterns;
-mod rules;
+mod application;
+mod domain;
 
-use app::GameApp;
+use application::GameApp;
 use eframe::egui::ViewportBuilder;
 
 fn main() -> eframe::Result<()> {

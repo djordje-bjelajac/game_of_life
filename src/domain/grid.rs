@@ -1,6 +1,6 @@
 use rand::Rng;
 
-use crate::cell::Cell;
+use super::cell::Cell;
 
 #[derive(Clone)]
 pub struct Grid {
