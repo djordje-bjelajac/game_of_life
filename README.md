@@ -62,6 +62,8 @@ the UI evolve independently.
 - Format: `cargo fmt`
 - Lints: `cargo clippy --all-targets --all-features`
 - Tests (logic only for now): `cargo test`
+- Test layout: each module keeps its unit tests in a sibling `*_test.rs` file (e.g.
+  `cell.rs` ↔ `cell_test.rs`) loaded via `#[path = \"...\"]` so code and tests stay co-located.
 
 Feel free to extend the pattern catalogue or add new UI panels by following the
 existing domain/application split.
