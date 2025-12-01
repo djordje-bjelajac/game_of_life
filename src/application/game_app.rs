@@ -3,11 +3,11 @@ use std::time::{Duration, Instant};
 use eframe::egui::{
     self,
     color_picker::{self, Alpha},
-    ComboBox, Color32, RichText, Sense, Slider,
+    Color32, ComboBox, RichText, Sense, Slider,
 };
 
 use crate::domain::{
-    next_generation, Cell, Grid, PATTERNS, MAX_GRID_SIZE, MAX_UPS, MIN_GRID_SIZE, MIN_UPS,
+    next_generation, Cell, Grid, MAX_GRID_SIZE, MAX_UPS, MIN_GRID_SIZE, MIN_UPS, PATTERNS,
 };
 
 pub struct GameApp {
@@ -164,7 +164,11 @@ impl GameApp {
     fn render_controls(&mut self, ui: &mut egui::Ui) {
         ui.heading("Simulation");
         if ui
-            .button(if self.paused { "Resume (Space)" } else { "Pause (Space)" })
+            .button(if self.paused {
+                "Resume (Space)"
+            } else {
+                "Pause (Space)"
+            })
             .clicked()
         {
             self.toggle_pause();
@@ -198,11 +202,8 @@ impl GameApp {
         let mut resized = false;
         let width_changed = ui
             .add(
-                Slider::new(
-                    &mut self.settings.grid_width,
-                    MIN_GRID_SIZE..=MAX_GRID_SIZE,
-                )
-                .text("Width"),
+                Slider::new(&mut self.settings.grid_width, MIN_GRID_SIZE..=MAX_GRID_SIZE)
+                    .text("Width"),
             )
             .changed();
         let height_changed = ui
@@ -233,11 +234,7 @@ impl GameApp {
         });
         ui.horizontal(|ui| {
             ui.label("Dead");
-            color_picker::color_edit_button_srgba(
-                ui,
-                &mut self.settings.dead_color,
-                Alpha::Opaque,
-            );
+            color_picker::color_edit_button_srgba(ui, &mut self.settings.dead_color, Alpha::Opaque);
         });
         ui.horizontal(|ui| {
             ui.label("Background");
@@ -383,4 +380,3 @@ impl eframe::App for GameApp {
         ctx.request_repaint_after(Duration::from_millis(16));
     }
 }
-

@@ -107,4 +107,3 @@ pub const PATTERNS: [PatternDefinition; 4] = [
         ],
     },
 ];
-
