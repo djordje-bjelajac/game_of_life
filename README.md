@@ -45,17 +45,22 @@ recommended for smooth animation on larger grids.
 
 ## Architecture Overview
 
-- `src/main.rs` sets up the `eframe` window and instantiates `GameApp`.
-- `application::game_app::GameApp` implements `eframe::App`, manages UI state,
-  user input, rendering, and delegates pure logic to the domain layer.
-- `domain` exposes:
-  - `Cell` and `Grid` primitives
-  - `rules::next_generation` (and supporting neighbor counting)
+The codebase follows a lightweight Domain-Driven Design/hexagonal architecture split:
+
+- `src/main.rs` is the outermost adapter, wiring the application into `eframe`.
+- `application::game_app::GameApp` is the primary driving adapter/port implementation.
+  It owns UI state, translates user input into application commands, and orchestrates
+  rendering. This layer never mutates simulation state directly; instead it invokes
+  domain services.
+- `domain` is the core and remains framework-free. It exposes:
+  - `Cell` and `Grid` entities/value objects
+  - `rules::next_generation` (pure simulation service + neighbor counting)
   - `patterns::PATTERNS` with predefined offsets
   - `constants.rs` defining safe bounds for sliders
 
-This separation keeps the simulation deterministic and testable while letting
-the UI evolve independently.
+By keeping adapters (`application`, UI) at the edges and the pure domain in the center,
+the project stays testable, deterministic, and open to new delivery mechanisms (CLI,
+network service, etc.) without modifying domain code.
 
 ## Development Notes
 
