@@ -41,15 +41,6 @@ impl Grid {
         }
     }
 
-    pub fn toggle(&mut self, x: usize, y: usize) {
-        if x < self.width && y < self.height {
-            self.cells[y][x] = match self.cells[y][x] {
-                Cell::Alive => Cell::Dead,
-                Cell::Dead => Cell::Alive,
-            };
-        }
-    }
-
     pub fn randomize(&mut self) {
         let mut rng = rand::thread_rng();
         for y in 0..self.height {

@@ -191,10 +191,9 @@ impl GameApp {
                     .text("Updates / second"),
             )
             .changed()
+            && self.settings.updates_per_second < MIN_UPS
         {
-            if self.settings.updates_per_second < MIN_UPS {
-                self.settings.updates_per_second = MIN_UPS;
-            }
+            self.settings.updates_per_second = MIN_UPS;
         }
 
         ui.separator();
